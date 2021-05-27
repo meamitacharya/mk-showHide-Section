@@ -99,19 +99,28 @@ function showHideSection(editor) {
       //     `showSection${section.attributes.attributes["data-app-name"]}`
       //   ] ===""
       // )
-      componentAttrs[
-        `showSection${section.attributes.attributes["data-app-name"]}`
-      ] = "checked";
+      // }
+
+      if (section.attributes.attributes["data-show"] === "true") {
+        componentAttrs[
+          `showSection${section.attributes.attributes["data-app-name"]}`
+        ] = "checked";
+      }
+      if (section.attributes.attributes["data-show"] === "false") {
+        componentAttrs[
+          `showSection${section.attributes.attributes["data-app-name"]}`
+        ] = "";
+      }
 
       console.log(
         section.attributes.attributes["data-app-name"],
         componentAttrs[
           `showSection${section.attributes.attributes["data-app-name"]}`
-        ]
+        ],
+        section.attributes.attributes["data-show"]
       );
-      // }
     });
-    console.log(componentAttrs);
+    // console.log(componentAttrs);
     component.set(componentAttrs);
 
     sectionsAfter.forEach((section) => {
@@ -129,55 +138,31 @@ function showHideSection(editor) {
           if (!value) {
             section.setStyle({ display: "none" });
             console.log(
-              "Before:",
-              section.attributes.attributes["data-app-name"],
-              componentAttrs[
-                `showSection${section.attributes.attributes["data-app-name"]}`
-              ]
+              "Before Clicked",
+              section.attributes.attributes["data-show"]
             );
 
-            componentAttrs[
-              `showSection${section.attributes.attributes["data-app-name"]}`
-            ] = "";
-
+            section.attributes.attributes["data-show"] = "false";
             console.log(
-              "After:",
-              section.attributes.attributes["data-app-name"],
-              componentAttrs[
-                `showSection${section.attributes.attributes["data-app-name"]}`
-              ],
-              "Unchecked"
+              "After clicked",
+              section.attributes.attributes["data-show"]
             );
-            console.log("---------------------------------------------------");
 
-            // console.log(section.attributes.attributes["data-app-name"]);
+            console.log("-----------------------------------");
           }
           if (value) {
             section.setStyle({ display: "initial" });
-            // console.log(componentAttrs);
-
             console.log(
-              "Before:",
-              section.attributes.attributes["data-app-name"],
-              componentAttrs[
-                `showSection${section.attributes.attributes["data-app-name"]}`
-              ],
-              "Unchecked"
+              "Before clicked",
+              section.attributes.attributes["data-show"]
             );
 
-            componentAttrs[
-              `showSection${section.attributes.attributes["data-app-name"]}`
-            ] = "checked";
-
+            section.attributes.attributes["data-show"] = "true";
             console.log(
-              "After:",
-              section.attributes.attributes["data-app-name"],
-              componentAttrs[
-                `showSection${section.attributes.attributes["data-app-name"]}`
-              ]
+              "After clicked",
+              section.attributes.attributes["data-show"]
             );
-            console.log("---------------------------------------------------");
-            // section.attributes.attributes["data-app-name"] = "checked";
+            console.log("----------------------------------");
           }
           // component.getTrait("showSection").props().value
           // console.log(component.setStyle({ display: "none" }));
